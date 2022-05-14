@@ -1,0 +1,4 @@
+# Contract data
+
+0x816602a3f9f66c47789f7c4b94fbd2b4c16818fd2b78a5378e7acfbc7b028312 - tx hash
+0x703aC92890BC6657D8D2c1Df45a1638F03059555 - contract address
