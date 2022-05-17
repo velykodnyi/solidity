@@ -33,9 +33,9 @@ contract MemoryTypesPracticeInput is IMemoryTypesPractice, Ownable {
     mapping(address => bool) public rewardsClaimed;
 
     constructor(
-        // address _validator, 
+        address _validator, 
         address _userInfo) {
-        // transferOwnership(_validator);
+        transferOwnership(_validator);
         userInfo = IUserInfo(_userInfo);
 
         addNewMan(1, 1, bytes32('0x11'), 1);
@@ -134,8 +134,9 @@ contract MemoryTypesPracticeInput is IMemoryTypesPractice, Ownable {
     // Should consume not more than 40000 as execution cost for 6 elements array
     function numberOfOldMenWithHighIq() external view returns(uint256) {
         uint256 _count;
+        uint256 len = men.length;
 
-        for (uint256 i = 0; i < men.length; i++) {
+        for (uint256 i = 0; i < len; i++) {
             Man memory man = men[i];
             if (man.edge > 50 && man.iq > 120) _count++;
         }
