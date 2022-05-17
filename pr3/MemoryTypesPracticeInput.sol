@@ -117,32 +117,16 @@ contract MemoryTypesPracticeInput is IMemoryTypesPractice, Ownable {
     // Now consumes 36689
     // Should consume not more than 36100 as execution cost for 6 elements array
     function getMiddleDickSize() external view returns(uint256) {
-        assembly {
-            let len := mload(men)
-
-            // uint256, bytes32, uint32, uint8
-            let ds := add(men, 0x20)
-
-            // Iterate until the bound is not met.
-            for
-                { let end := add(data, mul(len, 0x20)) }
-                lt(data, end)
-                { data := add(data, 0x20) }
-            {
-                sum := add(sum, mload(data))
-            }
-            return(div(sum, len))
-        }
         uint256 _sum;
-
-        for (uint256 i = 0; i < men.length; i++) {
-            uint256 size = men[i].dickSize;
-            assembly {
-                _sum := add(_sum, mload(add(add(size, 0x20), mul(i, 0x20))))
+        uint256 len = men.length;
+        for (uint256 i = 0; i < len; i++) {
+            unchecked {
+                _sum += men[i].dickSize;
             }
         }
-
-        return _sum/men.length;
+        unchecked {
+            return _sum/len;
+        }
     }
 
     // to optimize 6
